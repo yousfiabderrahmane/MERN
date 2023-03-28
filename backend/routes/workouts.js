@@ -4,6 +4,8 @@ const {
   createWorkout,
   getWorkouts,
   getWorkout,
+  updateWorkout,
+  deleteWorkout,
 } = require("../controllers/workoutController");
 
 // GET all workouts
@@ -16,16 +18,10 @@ router.get("/:id", getWorkout);
 router.post("/", createWorkout);
 
 // DELETE a workout
-router.delete("/:id", (req, res) => {
-  const id = Number(req.params.id);
-  res.json({ msg: `DELETE workout with id of ${id}` });
-});
+router.delete("/:id", deleteWorkout);
 
 // UPDATE a workout
-router.patch("/:id", (req, res) => {
-  const id = Number(req.params.id);
-  res.json({ msg: `PATCHED workout with id of ${id}` });
-});
+router.patch("/:id", updateWorkout);
 
 // export router to use it
 module.exports = router;

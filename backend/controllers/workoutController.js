@@ -2,7 +2,6 @@ const Workout = require("../models/workoutModel");
 const mongoose = require("mongoose");
 
 // 1-get all workouts
-
 const getWorkouts = async (req, res) => {
   // say we want only does with 20 reps, we do it like that workout.find({reps: 20})
   const workouts = await Workout.find({}).sort({ createdAt: -1 }); // descending order
@@ -10,7 +9,6 @@ const getWorkouts = async (req, res) => {
 };
 
 // 2-get a single workout
-
 const getWorkout = async (req, res) => {
   const { id } = req.params;
 
@@ -29,7 +27,6 @@ const getWorkout = async (req, res) => {
 };
 
 // 3-create a new workout
-
 const createWorkout = async (req, res) => {
   const { title, load, reps } = req.body;
   //add doc to db
@@ -42,7 +39,48 @@ const createWorkout = async (req, res) => {
 };
 
 // 4-delete a workout
+const deleteWorkout = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ msg: "No such workout my dude" });
+  }
+
+  const workout = await Workout.findOneAndDelete({ _id: id }); //find the document whe the _id is equal to the id
+
+  if (!workout) {
+    return res
+      .status(400)
+      .json({ msg: "No such workout with this id to delete" });
+  }
+
+  res.status(200).json(workout);
+};
 
 // 5-update a workout
+const updateWorkout = async (req, res) => {
+  const { id } = req.params;
 
-module.exports = { createWorkout, getWorkouts, getWorkout };
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ msg: "ID is not valid" });
+  }
+  //the first arg is the find criteria, and the second one is an object that represents the updates that we want to make
+  const workout = await Workout.findOneAndUpdate(
+    { _id: id },
+    {
+      ...req.body, //whatever propreties are in the body they will be updated
+    }
+  );
+  if (!workout) {
+    return res.status(400).json({ msg: "Couldnot update workout" });
+  }
+  res.status(200).json(workout);
+};
+
+module.exports = {
+  createWorkout,
+  getWorkouts,
+  getWorkout,
+  deleteWorkout,
+  updateWorkout,
+};
