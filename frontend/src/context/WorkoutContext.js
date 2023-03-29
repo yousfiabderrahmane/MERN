@@ -10,6 +10,8 @@ const workoutsReducer = (state, action) => {
       return { workouts: payload };
     case "CREATE_WORKOUT":
       return { workouts: [payload, ...state.workouts] };
+    case "DELETE_WORKOUT":
+      return { workouts: payload };
     default:
       return state;
   }

@@ -23,8 +23,6 @@ export const Form = () => {
     });
     const json = await response.json();
 
-    dispatch({ type: "CREATE_WORKOUT", payload: json.newWorkout });
-
     if (!response.ok) {
       setError(json.error);
       console.log(json.error);
@@ -35,6 +33,7 @@ export const Form = () => {
       setTitle("");
       setLoad(0);
       setReps(0);
+      dispatch({ type: "CREATE_WORKOUT", payload: json.newWorkout });
     }
   };
 
