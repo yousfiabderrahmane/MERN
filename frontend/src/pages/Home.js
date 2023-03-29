@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { WorkoutDetails } from "../components/WorkoutDetails";
 import { Form } from "../components/Form";
+import { UseWorkoutContext } from "../context/WorkoutContext";
 
 export const Home = () => {
-  const [workouts, setWorkouts] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  // const [workouts, setWorkouts] = useState(null);
+
+  const { workouts, dispatch } = UseWorkoutContext();
 
   const fetchData = async () => {
     //we declared the proxy in the packagejson so now we dont have to use it explicitly only works in deplyomenet
@@ -14,8 +15,7 @@ export const Home = () => {
     if (response.ok) {
       const data = await response.json();
 
-      setWorkouts(data);
-      console.log(data);
+      dispatch({ type: "SET_WORKOUTS", payload: data });
     }
   };
 
