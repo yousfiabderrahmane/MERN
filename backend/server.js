@@ -2,6 +2,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const express = require("express");
 const workoutRoutes = require("./routes/workouts");
+const usersRoutes = require("./routes/users");
 
 // env variables
 const PORT = process.env.PORT;
@@ -18,6 +19,7 @@ app.use((req, res, next) => {
 
 // routes
 app.use("/api/workouts", workoutRoutes); //when we go to this path use this router
+app.use("/api/user", usersRoutes); //when we go to this path use this router
 
 //connect to db
 mongoose
