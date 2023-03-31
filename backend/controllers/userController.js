@@ -1,5 +1,6 @@
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 const createToken = (_id) => {
   //three args : 1st => payload object nothing sensitive, 2nd => secret only know to server, 3rd => options
@@ -8,7 +9,18 @@ const createToken = (_id) => {
 
 // login user
 const loginUser = async (req, res) => {
-  res.json({ msg: "login user" });
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.login(email, password);
+
+    //create token
+    const token = createToken(user._id);
+
+    res.status(200).json({ msg: "Successfully logged in", token });
+  } catch (error) {
+    res.status(400).json({ msg: error.message });
+  }
 };
 
 // signup user
