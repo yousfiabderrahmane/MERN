@@ -1,8 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Navbar } from "./components/Navbar";
+import { UseAuthContext } from "./context/AuthContext";
 
 function App() {
+  const { user } = UseAuthContext();
+  console.log(user);
   return (
     <div className="App">
       <BrowserRouter>
