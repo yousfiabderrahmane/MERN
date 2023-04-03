@@ -3,16 +3,23 @@ import { useState } from "react";
 export const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(email, password);
+    console.log({ email, password, name });
   };
 
   return (
     <form className="signup" onSubmit={handleSubmit}>
       <h3>Sign up</h3>
+      <label>Display Name</label>
+      <input
+        type="text"
+        onChange={(e) => setName(e.target.value)}
+        value={name}
+      />
       <label>Email</label>
       <input
         type="email"
