@@ -34,7 +34,7 @@ userSchema.statics.signup = async (email, password) => {
     throw Error("Password is not strong enough");
   }
 
-  const exists = await User.findOne({ email }); //this refers to this model
+  const exists = await User.findOne({ email });
 
   if (exists) {
     throw Error("Email already in use");
@@ -55,7 +55,7 @@ userSchema.statics.login = async (email, password) => {
     throw Error("All fields must be filled");
   }
 
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email }); //declarinaha lte7t o khdama hnaya because of scopin or hoisting i guess
 
   if (!user) {
     throw Error("Incorrect email");
