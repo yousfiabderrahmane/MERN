@@ -87,7 +87,7 @@ const updateWorkout = async (req, res) => {
     }
   );
   if (!workout) {
-    return res.status(400).json({ msg: "Couldnot update workout" });
+    return res.status(400).json({ msg: "Could not update workout" });
   }
   res.status(200).json(workout);
 };

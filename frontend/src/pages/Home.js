@@ -4,8 +4,6 @@ import { Form } from "../components/Form";
 import { UseWorkoutContext } from "../context/WorkoutContext";
 
 export const Home = () => {
-  // const [workouts, setWorkouts] = useState(null);
-
   const { workouts, dispatch } = UseWorkoutContext();
 
   const fetchData = async () => {
