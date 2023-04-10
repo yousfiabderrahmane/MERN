@@ -7,10 +7,10 @@ export const Signup = () => {
   const [name, setName] = useState("");
 
   const { signup, error, isLoading } = useSignup();
-  console.log(error);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("test");
 
     await signup(email, password, name);
   };
@@ -37,8 +37,10 @@ export const Signup = () => {
         value={password}
       />
 
-      <button disabled={isLoading}>Sign up</button>
-      {error && <div className="error">ERROR</div>}
+      <button disabled={isLoading}>
+        {isLoading ? "Loading ... " : "Sign up"}
+      </button>
+      {error && <div className="error">{error}</div>}
     </form>
   );
 };

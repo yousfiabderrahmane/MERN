@@ -6,8 +6,6 @@ import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
 
 function App() {
-  const { user } = UseAuthContext();
-  console.log(user);
   return (
     <div className="App">
       <BrowserRouter>

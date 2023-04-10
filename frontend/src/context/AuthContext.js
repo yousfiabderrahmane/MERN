@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
     user: null,
   });
 
-  console.log(`Auth Context State: ${state}`);
+  console.log("Auth Context State:", state);
 
   return (
     <AuthContext.Provider value={{ ...state, dispatch }}>

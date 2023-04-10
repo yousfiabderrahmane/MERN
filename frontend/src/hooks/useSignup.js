@@ -13,15 +13,15 @@ export const useSignup = () => {
 
     const response = await fetch("/api/user/signup", {
       method: "POST",
+      body: JSON.stringify({ email, password, name }),
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(email, password, name),
     });
     const json = await response.json();
-    console.log("wtf");
 
     if (!response.ok) {
       setIsLoading(false);
-      setError(json.error);
+      setError(json.msg);
+      console.log(`I AM : ${json.msg}`);
     } else {
       //save the user to local storage
       localStorage.setItem("user", JSON.stringify(json));
