@@ -6,8 +6,6 @@ export const Navbar = () => {
   const { user } = UseAuthContext();
   const { logout } = useLogout();
 
-  console.log(user);
-
   const handleLogout = () => {
     logout();
   };
@@ -19,13 +17,17 @@ export const Navbar = () => {
           <h1>Workout Tracker</h1>
         </Link>
         <nav>
-          <div>
-            <button onClick={handleLogout}>Log out</button>
-          </div>
-          <div>
-            <Link to={"/login"}>Login</Link>
-            <Link to={"/signup"}>Signup</Link>
-          </div>
+          {user ? (
+            <div>
+              <span>{user.name}</span>
+              <button onClick={handleLogout}>Log out</button>
+            </div>
+          ) : (
+            <div>
+              <Link to={"/login"}>Login</Link>
+              <Link to={"/signup"}>Signup</Link>
+            </div>
+          )}
         </nav>
       </div>
     </header>

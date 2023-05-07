@@ -2,6 +2,8 @@ import { createContext, useContext, useReducer } from "react";
 
 export const AuthContext = createContext();
 
+const storedUser = localStorage.getItem("user");
+
 export const authReducer = (state, action) => {
   const { type, payload } = action;
   switch (type) {
@@ -16,7 +18,7 @@ export const authReducer = (state, action) => {
 
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, {
-    user: null,
+    user: storedUser ? storedUser : null,
   });
 
   console.log("Auth Context State:", state);
